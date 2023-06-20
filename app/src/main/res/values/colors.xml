@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="activeThumb">#293358</color>
+    <color name="activeTrack">#4e597a</color>
+    <color name="inactiveThumb">#e6efef</color>
+    <color name="inactiveTrack">#e6efef</color>
 </resources>

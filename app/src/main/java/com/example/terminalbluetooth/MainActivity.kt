@@ -1,7 +1,5 @@
 package com.example.terminalbluetooth
 
-//a
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -15,6 +13,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.provider.Telephony
@@ -29,6 +28,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.util.*
 
@@ -36,14 +36,13 @@ const val fileName = "address.txt"
 
 //-----------------------------------------------------------------> OnMapReadyCallback
 class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
-    //c
     lateinit var mBtAdapter: BluetoothAdapter
     var mAddressDevices: ArrayAdapter<String>? = null
     var mNameDevices: ArrayAdapter<String>? = null
     var tts: TextToSpeech? = null
 
     val requestEnableBluetooth =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        registerForActivityResult(StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 // Bluetooth habilitado, realizar acción correspondiente
                 ttsSpeak("Bluetooth activated")
@@ -87,7 +86,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     }
 
-    @SuppressLint("SuspiciousIndentation", "MissingPermission")
+    @SuppressLint("SuspiciousIndentation", "MissingPermission", "UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -251,7 +250,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         idBtnPopUp.setOnClickListener {
             val popUpView =  LayoutInflater.from(applicationContext).inflate(R.layout.popup_layout,null,false);
             val popupWindow = PopupWindow(popUpView, 1000, 1600, false)
-            popupWindow.showAtLocation(idBtnPopUp, Gravity.CENTER, 0, 0)
+            popupWindow.showAtLocation(idBtnPopUp, Gravity.TOP, 0, 0)
 
             popUpView.setOnClickListener { popupWindow.dismiss() }
 
@@ -263,40 +262,66 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             val idSwitchGmail = popUpView.findViewById<Switch>(R.id.idSwitchGmail)
             val idSwitchSMS = popUpView.findViewById<Switch>(R.id.idSwitchSMS)
 
+            val thumbActiveColor = ContextCompat.getColor(this, R.color.activeThumb)
+            val thumbInactiveColor = ContextCompat.getColor(this, R.color.inactiveThumb)
+            val trackActiveColor = ContextCompat.getColor(this, R.color.activeTrack)
+            val trackInactiveColor = ContextCompat.getColor(this, R.color.inactiveTrack)
+
             idSwitchAlarma.isChecked = flagAlarma
+            if (idSwitchAlarma.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchAlarma)
             idSwitchLlamada.isChecked = flagLlamada
+            if (idSwitchLlamada.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchLlamada)
             idSwitchBateria.isChecked = flagBateria
+            if (idSwitchBateria.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchBateria)
             idSwitchPower.isChecked = flagPower
+            if (idSwitchPower.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchPower)
             idSwitchWhatsapp.isChecked = flagWhatsapp
+            if (idSwitchWhatsapp.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchWhatsapp)
             idSwitchGmail.isChecked = flagGmail
+            if (idSwitchGmail.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchGmail)
             idSwitchSMS.isChecked = flagSMS
+            if (idSwitchSMS.isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchSMS)
 
             idSwitchAlarma.setOnCheckedChangeListener { _, isChecked ->
                 flagAlarma = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchAlarma)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchAlarma)
             }
 
             idSwitchLlamada.setOnCheckedChangeListener { _, isChecked ->
                 flagLlamada = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchLlamada)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchLlamada)
             }
 
             idSwitchBateria.setOnCheckedChangeListener { _, isChecked ->
                 flagBateria = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchBateria)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchBateria)
             }
 
             idSwitchPower.setOnCheckedChangeListener { _, isChecked ->
                 flagPower = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchPower)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchPower)
             }
 
             idSwitchWhatsapp.setOnCheckedChangeListener { _, isChecked ->
                 flagWhatsapp = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchWhatsapp)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchWhatsapp)
             }
 
             idSwitchGmail.setOnCheckedChangeListener { _, isChecked ->
                 flagGmail = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchGmail)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchGmail)
             }
 
             idSwitchSMS.setOnCheckedChangeListener { _, isChecked ->
                 flagSMS = isChecked
+                if (isChecked) switchColor(thumbActiveColor, trackActiveColor, idSwitchSMS)
+                else switchColor(thumbInactiveColor, trackInactiveColor, idSwitchSMS)
             }
         }
     }
@@ -332,7 +357,10 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             alarmMgr.setAlarmClock(alarmMgr.nextAlarmClock, alarmIntent)
     }
 
-    //e
+    private fun ttsSpeak(cadena: String) {
+        tts!!.speak(cadena, TextToSpeech.QUEUE_FLUSH, null, null)
+    }
+
     fun sendCommand(input: String) {
         if (m_bluetoothSocket != null) {
             try {
@@ -341,10 +369,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 e.printStackTrace()
             }
         }
-    }
-
-    private fun ttsSpeak(cadena: String) {
-        tts!!.speak(cadena, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     private fun bluetoothConnect(address: String): Boolean{
@@ -433,5 +457,10 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             ttsSpeak("File address.txt doesn't exists")
         }
         return ""
+    }
+
+    private fun switchColor(thumbColor: Int, trackColor: Int, switch: Switch){
+        switch.thumbTintList = ColorStateList.valueOf(thumbColor)
+        switch.trackTintList = ColorStateList.valueOf(trackColor)
     }
 }
