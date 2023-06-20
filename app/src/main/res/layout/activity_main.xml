@@ -87,22 +87,6 @@
             android:layout_marginTop="5dp"
             android:text="CONECTAR" />
 
-        <EditText
-            android:id="@+id/idTextOut"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="Texto a Enviar"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/idBtnEnviar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="ENVIAR TEXTO" />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />

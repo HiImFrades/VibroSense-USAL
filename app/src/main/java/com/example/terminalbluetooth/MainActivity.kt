@@ -29,15 +29,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.view.isInvisible
-import com.google.android.gms.maps.MapsInitializer
-import java.io.File
 import java.io.IOException
 import java.util.*
 
-
-//b
-const val REQUEST_ENABLE_BT = 1
 const val fileName = "address.txt"
 
 //-----------------------------------------------------------------> OnMapReadyCallback
@@ -56,15 +50,11 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
                 val idSpinDisp = findViewById<Spinner>(R.id.idSpinDisp)
                 val idBtnConect = findViewById<Button>(R.id.idBtnConect)
-                val idTextOut = findViewById<EditText>(R.id.idTextOut)
-                val idBtnEnviar = findViewById<Button>(R.id.idBtnEnviar)
                 val idBtnOn = findViewById<Button>(R.id.idBtnOn)
 
                 val address = readFile()
 
                 if(bluetoothConnect(address)==true){
-                    idTextOut.isEnabled = true
-                    idBtnEnviar.isEnabled = true
                     idBtnOn.isEnabled = true
                     idSpinDisp.isEnabled = false
                     idBtnConect.isEnabled = false
@@ -100,32 +90,23 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
     @SuppressLint("SuspiciousIndentation", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {
-            //println(it.name)
-        }
-        setContentView(R.layout.activity_main)
 
-        //d
+        setContentView(R.layout.activity_main)
 
         tts = TextToSpeech(this, this)
 
         mAddressDevices = ArrayAdapter(this, android.R.layout.simple_list_item_1)
         mNameDevices = ArrayAdapter(this, android.R.layout.simple_list_item_1)
 
-
         val idBtnOnBT = findViewById<Button>(R.id.idBtnOnBT)
         val idSpinDisp = findViewById<Spinner>(R.id.idSpinDisp)
         val idBtnConect = findViewById<Button>(R.id.idBtnConect)
-        val idTextOut = findViewById<EditText>(R.id.idTextOut)
-        val idBtnEnviar = findViewById<Button>(R.id.idBtnEnviar)
         val idBtnOn = findViewById<Button>(R.id.idBtnOn)
         val idBtnOff = findViewById<Button>(R.id.idBtnOff)
         val idBtnPopUp = findViewById<ImageButton>(R.id.idBtnPopUp)
 
         idSpinDisp.isEnabled = false
         idBtnConect.isEnabled = false
-        idTextOut.isEnabled = false
-        idBtnEnviar.isEnabled = false
         idBtnOn.isEnabled = false
         idBtnOff.isEnabled = false
 
@@ -144,14 +125,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 }
             }
 
-        val someActivityResultLauncher = registerForActivityResult(
-            StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == REQUEST_ENABLE_BT) {
-                Log.i("MainActivity", "ACTIVIDAD REGISTRADA")
-            }
-        }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             requestMultiplePermissions.launch(
                 arrayOf(
@@ -159,9 +132,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                     Manifest.permission.BLUETOOTH_CONNECT,
                     Manifest.permission.READ_PHONE_STATE,
                     Manifest.permission.RECEIVE_SMS,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.MANAGE_EXTERNAL_STORAGE
                 )
             )
         } else {
@@ -221,24 +191,12 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         //Inicializacion del bluetooth adapter
         this.mBtAdapter = (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter
 
-        //Comprobar si esta disponible o no
-        if (mBtAdapter == null) {
-            Toast.makeText(
-                this,
-                "Bluetooth no está disponible en este dipositivo",Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Bluetooth está disponible en este dispositivo", Toast.LENGTH_LONG)
-                .show()
-        }
-
         if (mBtAdapter.isEnabled) {
             //Si ya está activado
             //leer fichero
             val address = readFile()
             if (address != ""){
                 if(bluetoothConnect(address) == true){
-                    idTextOut.isEnabled = true
-                    idBtnEnviar.isEnabled = true
                     idBtnOn.isEnabled = true
                     idSpinDisp.isEnabled = false
                     idBtnConect.isEnabled = false
@@ -271,19 +229,8 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 val IntValSpin = idSpinDisp.selectedItemPosition
                 m_address = mAddressDevices!!.getItem(IntValSpin).toString()
                 if(bluetoothConnect(m_address)==true){
-                    idTextOut.isEnabled = true
-                    idBtnEnviar.isEnabled = true
                     idBtnOn.isEnabled = true
                 }
-            }
-        }
-
-        idBtnEnviar.setOnClickListener {
-            if (idTextOut.text.toString().isEmpty()) {
-                Toast.makeText(this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT)
-            } else {
-                var mensaje_out: String = idTextOut.text.toString()
-                sendCommand(mensaje_out)
             }
         }
 
@@ -375,52 +322,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
     //MÉTODO DE COMPROBACIONES CUANDO VOLVEMOS A ENTRAR EL LA APLICACIÓN DESDE EL MODO BACKGROUND
     override fun onRestart() {
         super.onRestart()
-        Toast.makeText(this, "HOLA DE NUEVO", Toast.LENGTH_LONG).show()
-
-        /*val idBtnDispBT = findViewById<Button>(R.id.idBtnDispBT)
-        val idSpinDisp = findViewById<Spinner>(R.id.idSpinDisp)
-        val idBtnConect = findViewById<Button>(R.id.idBtnConect)
-        val idTextOut = findViewById<EditText>(R.id.idTextOut)
-        val idBtnEnviar = findViewById<Button>(R.id.idBtnEnviar)
-        val idBtnOn = findViewById<Button>(R.id.idBtnOn)
-        val idBtnOff = findViewById<Button>(R.id.idBtnOff)*/
-
-        var requestBluetooth = registerForActivityResult(StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                //granted
-            } else {
-                //deny
-            }
-        }
-
-        val requestMultiplePermissions =
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-                permissions.entries.forEach {
-                    Log.d("test006", "${it.key} = ${it.value}")
-                }
-            }
-
-        val someActivityResultLauncher = registerForActivityResult(
-            StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == REQUEST_ENABLE_BT) {
-                Log.i("MainActivity", "ACTIVIDAD REGISTRADA")
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            requestMultiplePermissions.launch(
-                arrayOf(
-                    Manifest.permission.BLUETOOTH_SCAN,
-                    Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.READ_PHONE_STATE
-                )
-            )
-        } else {
-            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            requestBluetooth.launch(enableBtIntent)
-        }
-
         // Registrar el receptor de la alarma
         val alarmMgr = getSystemService(ALARM_SERVICE) as AlarmManager
         val intentAlarm = Intent(this, AlarmReceiver::class.java)
@@ -448,10 +349,10 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     private fun bluetoothConnect(address: String): Boolean{
         if(address!=""){
+            Toast.makeText(this, "Connecting to: $address ...", Toast.LENGTH_LONG).show()
             try {
                 if (m_bluetoothSocket == null || !m_isConnected) {
                     m_address = address
-                    Toast.makeText(this, m_address, Toast.LENGTH_LONG).show()
                     // Cancel discovery because it otherwise slows down the connection.
                     if (ActivityCompat.checkSelfPermission(
                             this,
@@ -465,9 +366,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                     m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
                     m_bluetoothSocket!!.connect()
 
-                    Toast.makeText(this, "CONEXION EXITOSA", Toast.LENGTH_LONG).show()
                     Log.i("MainActivity", "CONEXION EXITOSA")
-
                     ttsSpeak("Connected to " + mBtAdapter.getRemoteDevice(m_address).name)
                     writeFile(m_address)
 
@@ -526,7 +425,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 val texto = stream.bufferedReader().use {
                     it.readText()
                 }
-                Toast.makeText(this, texto, Toast.LENGTH_LONG).show()
                 if(texto!=""){
                     return texto
                 }
