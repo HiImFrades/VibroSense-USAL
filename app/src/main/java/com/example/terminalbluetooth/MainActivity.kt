@@ -34,7 +34,9 @@ import java.util.*
 
 const val fileName = "address.txt"
 
-//-----------------------------------------------------------------> OnMapReadyCallback
+/**
+ * Clase principal de la aplicación.
+ */
 class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
     lateinit var mBtAdapter: BluetoothAdapter
     var mAddressDevices: ArrayAdapter<String>? = null
@@ -44,7 +46,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
     val requestEnableBluetooth =
         registerForActivityResult(StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                // Bluetooth habilitado, realizar acción correspondiente
                 ttsSpeak("Bluetooth activated")
 
                 val idSpinDisp = findViewById<Spinner>(R.id.idSpinDisp)
@@ -64,7 +65,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 }
 
             } else {
-                // Bluetooth no habilitado, realizar acción correspondiente
                 ttsSpeak("Permission denied")
             }
         }
@@ -326,6 +326,14 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    /**
+     * Función que se ejecuta al iniciar la aplicación.
+     *
+     * La función inicializará el objeto TextToSpeech,
+     * el cuál servirá para introducir texto y se reproduzca una voz leyendo este texto.
+     *
+     * @param p0 es una variable de control
+     */
     override fun onInit(p0: Int) {
         if (p0 == TextToSpeech.SUCCESS) {
             var output = tts!!.setLanguage(Locale.ENGLISH)
@@ -336,6 +344,12 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    /**
+     * Función que se ejecuta al cerrar la aplicación.
+     *
+     * La función cerrará correctamente el objeto TextToSpeech.
+     *
+     */
     override fun onDestroy() {
         super.onDestroy()
         if (tts != null) {
@@ -344,7 +358,13 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    //MÉTODO DE COMPROBACIONES CUANDO VOLVEMOS A ENTRAR EL LA APLICACIÓN DESDE EL MODO BACKGROUND
+    /**
+     * Función que se ejecuta al volver a la aplicación desde el segundo plano.
+     *
+     * La función buscará si se ha añadido alguna alarma nueva al dispositivo
+     * para registrarla en la aplicación.
+     *
+     */
     override fun onRestart() {
         super.onRestart()
         // Registrar el receptor de la alarma
@@ -357,10 +377,26 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             alarmMgr.setAlarmClock(alarmMgr.nextAlarmClock, alarmIntent)
     }
 
+    /**
+     * Función del TextToSpeech.
+     *
+     * A esta función se le pasa una String la cual, con un método
+     * de la clase TextToSpeech, se convierte de texto a audio y se reproduce.
+     *
+     * @param cadena string a convertir de texto a audio.
+     */
     private fun ttsSpeak(cadena: String) {
         tts!!.speak(cadena, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
+    /**
+     * Función para enviar String al equipo externo.
+     *
+     * A esta función se le pasa una String que, a través del socket
+     * del módulo Bluetooth del dispositivo, se le envía al equipo externo.
+     *
+     * @param input
+     */
     fun sendCommand(input: String) {
         if (m_bluetoothSocket != null) {
             try {
@@ -371,13 +407,22 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    /**
+     * Función para realizar la conexión Bluetooth.
+     *
+     * A esta función se le pasa una String, la cual es una dirección MAC, a la
+     * que el socket del módulo Bluetooth del dispositivo se intentará conectar.
+     * Devuelve un Boolean que representa si se ha tenido éxito o no en la conexión.
+     *
+     * @param address dirección MAC a la que conectarse.
+     * @return true o false si ha habido éxito o no.
+     */
     private fun bluetoothConnect(address: String): Boolean{
         if(address!=""){
             Toast.makeText(this, "Connecting to: $address ...", Toast.LENGTH_LONG).show()
             try {
                 if (m_bluetoothSocket == null || !m_isConnected) {
                     m_address = address
-                    // Cancel discovery because it otherwise slows down the connection.
                     if (ActivityCompat.checkSelfPermission(
                             this,
                             Manifest.permission.BLUETOOTH_SCAN
@@ -410,6 +455,14 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         return false
     }
 
+    /**
+     * Función para cargar los dispositivos en el desplegable de la lista principal.
+     *
+     * Esta función obtiene la lista de dispositivos vinculados por Bluetooth
+     * del sistema y la carga en el desplegable de la vista principal, pudiendo seleccionar
+     * una MAC concreta para futuras conexiones.
+     *
+     */
     @SuppressLint("MissingPermission")
     private fun loadDevices(){
         val idSpinDisp = findViewById<Spinner>(R.id.idSpinDisp)
@@ -422,10 +475,8 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                 val deviceName = device.name
                 val deviceHardwareAddress = device.address // MAC address
                 mAddressDevices!!.add(deviceHardwareAddress)
-                //........... EN ESTE PUNTO GUARDO LOS NOMBRE A MOSTRARSE EN EL COMBO BOX
                 mNameDevices!!.add(deviceName)
             }
-            //ACTUALIZO LOS DISPOSITIVOS
             idSpinDisp.setAdapter(mNameDevices)
         } else {
             val noDevices = "Ningun dispositivo pudo ser emparejado"
@@ -436,6 +487,15 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    /**
+     * Función para escribir en el fichero interno "address.txt".
+     *
+     * A esta función se le pasa una String (normalmente una dirección),
+     * la cual se almacenará en un fichero interno de la aplicación
+     * llamado "address.txt".
+     *
+     * @param address dirección MAC a guardar en el fichero.
+     */
     private fun writeFile(address: String){
         this.openFileOutput(fileName, MODE_PRIVATE).use { output ->
             output.write(address.toByteArray())
@@ -443,6 +503,15 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     }
 
+    /**
+     * Función para leer el fichero interno "address.txt".
+     *
+     * Esta función lee una String (normalmente una dirección) del fichero
+     * interno de la aplicación llamado "address.txt", la cual la devolverá
+     * en el valor de retorno.
+     *
+     * @return devuelve la cadena en caso de éxito, una cadena vacía si hay fallo.
+     */
     private fun readFile(): String{
         try{
             this.openFileInput(fileName).use { stream ->
@@ -459,6 +528,17 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         return ""
     }
 
+    /**
+     * Función para cambiar de color los interruptores.
+     *
+     * Esta función cambia el color de los interruptores al
+     * activarlos o desactivarlos, pasandole los colores nuevos
+     * y el identificador del interruptor que se va a cambiar el color.
+     *
+     * @param thumbColor Integer del color del thumb del switch.
+     * @param trackColor Integer del color del track del switch.
+     * @param switch Identificador del switch a cambiar.
+     */
     private fun switchColor(thumbColor: Int, trackColor: Int, switch: Switch){
         switch.thumbTintList = ColorStateList.valueOf(thumbColor)
         switch.trackTintList = ColorStateList.valueOf(trackColor)
