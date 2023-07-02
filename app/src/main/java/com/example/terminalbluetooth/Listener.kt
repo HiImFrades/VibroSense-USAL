@@ -6,6 +6,16 @@ import android.widget.Toast
 import java.io.IOException
 
 class Listener: NotificationListenerService() {
+
+    /**
+     * Función que se ejecuta al dispararse el listener registrado en la actividad principal.
+     *
+     * Cuando el sistema reciba una notificación de una aplicación externa, esta función
+     * recoge esa notificación para poder obtener información sobre qué aplicación se
+     * está notificando.
+     *
+     * @param notification notificación recogida.
+     */
     override fun onNotificationPosted(notification: StatusBarNotification) {
         Toast.makeText(this, notification.packageName, Toast.LENGTH_LONG).show()
         if (notification.packageName == "com.whatsapp") {
