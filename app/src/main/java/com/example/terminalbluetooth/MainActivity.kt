@@ -86,6 +86,13 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     }
 
+    /**
+     * Función que se ejecuta al crearse la clase MainActivity.
+     *
+     * Esta función compone el main del programa.
+     *
+     * @param savedInstanceState parámetro de configuración.
+     */
     @SuppressLint("SuspiciousIndentation", "MissingPermission", "UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -191,8 +198,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         this.mBtAdapter = (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter
 
         if (mBtAdapter.isEnabled) {
-            //Si ya está activado
-            //leer fichero
             val address = readFile()
             if (address != ""){
                 if(bluetoothConnect(address) == true){
@@ -214,15 +219,14 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         //Boton Encender bluetooth
         idBtnOnBT.setOnClickListener {
             if (mBtAdapter.isEnabled) {
-                //Si ya está activado
                 Toast.makeText(this, "Bluetooth ya se encuentra activado", Toast.LENGTH_LONG).show()
             } else {
-                //Encender Bluetooth
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 requestEnableBluetooth.launch(enableBtIntent)
             }
         }
 
+        //Botón Conectar
         idBtnConect.setOnClickListener {
             if(idSpinDisp.isEnabled == true){
                 val IntValSpin = idSpinDisp.selectedItemPosition
@@ -233,6 +237,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             }
         }
 
+        //Botón encendido
         idBtnOn.setOnClickListener {
             sendCommand("Encender")
             idBtnOff.isEnabled = true
@@ -240,6 +245,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             ttsSpeak("Distance sensor turned on")
         }
 
+        //Botón apagado
         idBtnOff.setOnClickListener {
             sendCommand("Apagar")
             idBtnOff.isEnabled = false
@@ -247,6 +253,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             ttsSpeak("Distance sensor turned off")
         }
 
+        //Botón de ajustes
         idBtnPopUp.setOnClickListener {
             val popUpView =  LayoutInflater.from(applicationContext).inflate(R.layout.popup_layout,null,false);
             val popupWindow = PopupWindow(popUpView, 1000, 1600, false)

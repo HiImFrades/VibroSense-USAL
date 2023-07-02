@@ -18,6 +18,12 @@ class Listener: NotificationListenerService() {
     }
 }
 
+/**
+ * Función que envía una String por Bluetooth mediante el socket
+ * del módulo Bluetooth del dispositivo.
+ *
+ * @param input String a enviar al equipo externo.
+ */
 fun sendNotification(input: String) {
     if (MainActivity.m_bluetoothSocket != null) {
         try{

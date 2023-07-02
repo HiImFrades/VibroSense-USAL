@@ -9,9 +9,26 @@ import androidx.activity.ComponentActivity
 import java.io.IOException
 
 
-
+/**
+ * Clase del recibidor de las alarmas
+ *
+ * Esta clase deriva de la clase BroadcastReceiver() y
+ * tiene dos funciones: enviar la señal de alarma al equipo
+ * y reigstrar la siguiente alarma del dispositivo móvil.
+ *
+ */
 class AlarmReceiver : BroadcastReceiver() {
 
+    /**
+     * Función que se ejecuta al dispararse el recibidor registrado en la actividad principal.
+     *
+     * Cuando reciba la señal registrada de la alarma en la actividad principal
+     * enviará la orden de alarma al equipo externo por Bluetooth
+     * y buscará la siguiente alarma del dispositivo para registrarla.
+     *
+     * @param context contexto de la actividad principal.
+     * @param intent acción que se registra en el recibidor.
+     */
     override fun onReceive(context: Context?, intent: Intent?) {
         if(MainActivity.flagAlarma)
             sendAlarm("Alarma")
@@ -24,6 +41,12 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 }
 
+/**
+ * Función que envía una String por Bluetooth mediante el socket
+ * del módulo Bluetooth del dispositivo.
+ *
+ * @param input String a enviar al equipo externo.
+ */
 fun sendAlarm(input: String) {
     if (MainActivity.m_bluetoothSocket != null) {
         try{
