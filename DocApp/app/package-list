@@ -1,0 +1,61 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.example.terminalbluetooth.ui.theme////PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/index.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//Pink40/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-pink40.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//Pink80/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-pink80.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//Purple40/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-purple40.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//Purple80/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-purple80.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//PurpleGrey40/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-purple-grey40.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//PurpleGrey80/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-purple-grey80.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//TerminalBluetoothTheme/#kotlin.Boolean#kotlin.Boolean#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-terminal-bluetooth-theme.html
+$dokka.location:com.example.terminalbluetooth.ui.theme//Typography/#/PointingToDeclaration/app/com.example.terminalbluetooth.ui.theme/-typography.html
+$dokka.location:com.example.terminalbluetooth////PointingToDeclaration/app/com.example.terminalbluetooth/index.html
+$dokka.location:com.example.terminalbluetooth//fileName/#/PointingToDeclaration/app/com.example.terminalbluetooth/file-name.html
+$dokka.location:com.example.terminalbluetooth//sendAlarm/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-alarm.html
+$dokka.location:com.example.terminalbluetooth//sendCall/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-call.html
+$dokka.location:com.example.terminalbluetooth//sendLowBattery/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-low-battery.html
+$dokka.location:com.example.terminalbluetooth//sendNotification/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-notification.html
+$dokka.location:com.example.terminalbluetooth//sendPowerOn/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-power-on.html
+$dokka.location:com.example.terminalbluetooth//sendSMS/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/send-s-m-s.html
+$dokka.location:com.example.terminalbluetooth/AlarmReceiver///PointingToDeclaration/app/com.example.terminalbluetooth/-alarm-receiver/index.html
+$dokka.location:com.example.terminalbluetooth/AlarmReceiver/AlarmReceiver/#/PointingToDeclaration/app/com.example.terminalbluetooth/-alarm-receiver/-alarm-receiver.html
+$dokka.location:com.example.terminalbluetooth/AlarmReceiver/onReceive/#android.content.Context?#android.content.Intent?/PointingToDeclaration/app/com.example.terminalbluetooth/-alarm-receiver/on-receive.html
+$dokka.location:com.example.terminalbluetooth/CallReceiver///PointingToDeclaration/app/com.example.terminalbluetooth/-call-receiver/index.html
+$dokka.location:com.example.terminalbluetooth/CallReceiver/CallReceiver/#/PointingToDeclaration/app/com.example.terminalbluetooth/-call-receiver/-call-receiver.html
+$dokka.location:com.example.terminalbluetooth/CallReceiver/onReceive/#android.content.Context?#android.content.Intent?/PointingToDeclaration/app/com.example.terminalbluetooth/-call-receiver/on-receive.html
+$dokka.location:com.example.terminalbluetooth/Listener///PointingToDeclaration/app/com.example.terminalbluetooth/-listener/index.html
+$dokka.location:com.example.terminalbluetooth/Listener/Listener/#/PointingToDeclaration/app/com.example.terminalbluetooth/-listener/-listener.html
+$dokka.location:com.example.terminalbluetooth/Listener/onNotificationPosted/#android.service.notification.StatusBarNotification/PointingToDeclaration/app/com.example.terminalbluetooth/-listener/on-notification-posted.html
+$dokka.location:com.example.terminalbluetooth/LowBattery///PointingToDeclaration/app/com.example.terminalbluetooth/-low-battery/index.html
+$dokka.location:com.example.terminalbluetooth/LowBattery/LowBattery/#/PointingToDeclaration/app/com.example.terminalbluetooth/-low-battery/-low-battery.html
+$dokka.location:com.example.terminalbluetooth/LowBattery/onReceive/#android.content.Context?#android.content.Intent?/PointingToDeclaration/app/com.example.terminalbluetooth/-low-battery/on-receive.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion///PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/index.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagAlarma/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-alarma.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagBateria/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-bateria.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagGmail/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-gmail.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagLlamada/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-llamada.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagPower/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-power.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagSMS/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-s-m-s.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/flagWhatsapp/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/flag-whatsapp.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/m_address/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/m_address.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/m_bluetoothSocket/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/m_bluetooth-socket.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/m_isConnected/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/m_is-connected.html
+$dokka.location:com.example.terminalbluetooth/MainActivity.Companion/m_myUUID/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-companion/m_my-u-u-i-d.html
+$dokka.location:com.example.terminalbluetooth/MainActivity///PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/index.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/MainActivity/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/-main-activity.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/mAddressDevices/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/m-address-devices.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/mBtAdapter/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/m-bt-adapter.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/mNameDevices/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/m-name-devices.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/onInit/#kotlin.Int/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/on-init.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/requestEnableBluetooth/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/request-enable-bluetooth.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/sendCommand/#kotlin.String/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/send-command.html
+$dokka.location:com.example.terminalbluetooth/MainActivity/tts/#/PointingToDeclaration/app/com.example.terminalbluetooth/-main-activity/tts.html
+$dokka.location:com.example.terminalbluetooth/PowerOn///PointingToDeclaration/app/com.example.terminalbluetooth/-power-on/index.html
+$dokka.location:com.example.terminalbluetooth/PowerOn/PowerOn/#/PointingToDeclaration/app/com.example.terminalbluetooth/-power-on/-power-on.html
+$dokka.location:com.example.terminalbluetooth/PowerOn/onReceive/#android.content.Context?#android.content.Intent?/PointingToDeclaration/app/com.example.terminalbluetooth/-power-on/on-receive.html
+$dokka.location:com.example.terminalbluetooth/SMSReceiver///PointingToDeclaration/app/com.example.terminalbluetooth/-s-m-s-receiver/index.html
+$dokka.location:com.example.terminalbluetooth/SMSReceiver/SMSReceiver/#/PointingToDeclaration/app/com.example.terminalbluetooth/-s-m-s-receiver/-s-m-s-receiver.html
+$dokka.location:com.example.terminalbluetooth/SMSReceiver/onReceive/#android.content.Context?#android.content.Intent?/PointingToDeclaration/app/com.example.terminalbluetooth/-s-m-s-receiver/on-receive.html
+com.example.terminalbluetooth
+com.example.terminalbluetooth.ui.theme
+
