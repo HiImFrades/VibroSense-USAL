@@ -5,6 +5,13 @@ import android.content.Context
 import android.content.Intent
 import java.io.IOException
 
+/**
+ * Clase del recibidor de cargador conectado
+ *
+ * Esta clase deriva de la clase BroadcastReceiver() y
+ * tiene la función de enviar la señal de cargador al equipo externo
+ *
+ */
 class PowerOn : BroadcastReceiver() {
 
     /**

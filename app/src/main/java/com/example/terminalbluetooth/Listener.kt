@@ -5,6 +5,14 @@ import android.service.notification.StatusBarNotification
 import android.widget.Toast
 import java.io.IOException
 
+/**
+ * Clase de escucha de las notificaciones
+ *
+ * Esta clase deriva de la clase NotificationListenerService() y
+ * tiene la función de escuchar las notificaciones entrantes y, si son
+ * de Whatsapp o de GMail, enviar la señal correspondiente al equipo externo
+ *
+ */
 class Listener: NotificationListenerService() {
 
     /**

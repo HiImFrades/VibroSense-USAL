@@ -7,7 +7,13 @@ import android.telephony.TelephonyManager
 import java.io.IOException
 import java.util.Date
 
-
+/**
+ * Clase del recibidor de llamada entrante
+ *
+ * Esta clase deriva de la clase BroadcastReceiver() y
+ * tiene la función de enviar la señal de llamada al equipo externo
+ *
+ */
 class CallReceiver : BroadcastReceiver() {
 
     /**

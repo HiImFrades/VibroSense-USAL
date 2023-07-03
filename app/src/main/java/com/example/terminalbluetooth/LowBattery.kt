@@ -5,6 +5,13 @@ import android.content.Context
 import android.content.Intent
 import java.io.IOException
 
+/**
+ * Clase del recibidor de batería baja
+ *
+ * Esta clase deriva de la clase BroadcastReceiver() y
+ * tiene la función de enviar la señal de batería baja al equipo externo
+ *
+ */
 class LowBattery : BroadcastReceiver() {
 
     /**
